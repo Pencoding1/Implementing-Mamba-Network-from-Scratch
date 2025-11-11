@@ -25,6 +25,8 @@ class RNN(Module):
         for t in range(seq_lengths):
             x_t = sequences[:, t, :]
             hidden_state = self.cell(x_t, hidden_state)
-            all_hidden_states_tensor = stack(all_hidden_states, dim=1)
+            all_hidden_states.append(hidden_state)        
+
+        all_hidden_states_tensor = stack(all_hidden_states, dim=1)
         
         return all_hidden_states_tensor, hidden_state
